@@ -17,7 +17,18 @@
 		var inputTP = [];
 		for (var i = 0; i < inputInit.length; i++) {
 			var type = inputInit[i].getAttribute('type');
-			if (type == 'text' || type == "password") {
+			if (type == 'text' 
+				|| type == "password"
+
+				|| type == "tel"
+
+				|| type == "search"
+
+				|| type == "number"
+
+				|| type == "email"
+
+				) {
 				inputTP.push(inputInit[i]);
 			}
 		}
@@ -70,7 +81,7 @@
 				span.style.filter = "Alpha(opacity=70)";
 
 				document.body.appendChild(span);
-				
+
 				span.style.marginTop = -parseInt(span.clientHeight) / 2 + 'px';
 
 				span.parentNode.removeChild(span);
