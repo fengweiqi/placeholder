@@ -35,14 +35,6 @@
 		for (var i = 0; i < inputTP.length; i++) {
 			var placeholder = inputTP[i].getAttribute('placeholder');
 			if (placeholder != null) {
-				var inputWrap = document.createElement('span');
-
-				inputWrap.style.display = "inline-block";
-				inputWrap.style.position = "relative";
-				inputTP[i].parentNode.insertBefore(inputWrap, inputTP[i]);
-
-				var placeholder = inputTP[i].getAttribute('placeholder');
-
 				if (window.getComputedStyle) {
 
 					var computedStyle = getComputedStyle(inputTP[i], null)
@@ -52,72 +44,40 @@
 					var computedStyle = inputTP[i].currentStyle;
 
 				}
+				// 1.0.0版，定位实现
+				
+				var x= inputTP[i].getBoundingClientRect().left+document.documentElement.scrollLeft;
 
-				var paddingLeft = computedStyle.paddingLeft;
-			
+　　			var y =inputTP[i].getBoundingClientRect().top+document.documentElement.scrollTop;
 
+				// input元素关键样式
+				
 				var fontSize = computedStyle.fontSize;
 				var color = computedStyle.color;
 				var fontFamily = computedStyle.fontFamily;
+				var height = computedStyle.height
 				var borderLeft = isNaN(computedStyle.borderLeftWidth) ? 0 : computedStyle.borderLeftWidth;
-				var marginTop = computedStyle.marginTop;
-				var marginBottom = computedStyle.marginBottom;
-				var marginLeft = computedStyle.marginLeft;
-				var marginRight = computedStyle.marginRight;
-				var float = computedStyle.float;
-				var position = computedStyle.position;
-				var top = computedStyle.top;
-				var left = computedStyle.left;
-				var bottom = computedStyle.bottom;
-				var right = computedStyle.right;
-				var rInput = inputTP[i].parentNode.removeChild(inputTP[i]);
-
-				rInput.style.marginTop = 0;
-				rInput.style.marginBottom = 0;
-				rInput.style.marginLeft = 0;
-				rInput.style.marginRight = 0;
-				rInput.style.position = 'static';
-				
-
-				inputWrap.style.marginTop = marginTop;
-				inputWrap.style.marginBottom = marginBottom;
-				inputWrap.style.marginLeft = marginLeft;
-				inputWrap.style.marginRight = marginRight;
-				inputWrap.style.position = 'relative';
-				inputWrap.style.top = top;
-				inputWrap.style.bottom = bottom;
-				inputWrap.style.left = left;
-				inputWrap.style.right = right;
-				
-				inputWrap.style.float = float;
-
-				inputWrap.appendChild(rInput);
-
+				var borderTop = isNaN(computedStyle.borderTopWidth) ? 0 : computedStyle.borderTopWidth;
+				var paddingLeft = computedStyle.paddingLeft;
+				var paddingTop = computedStyle.paddingTop;
+				// 创建span
 				var span = document.createElement('span');
 
 				span.innerHTML = placeholder;
 				span.style.position = "absolute";
-				span.style.top = "50%";
-				span.style.left = parseInt(paddingLeft, 10) + parseInt(borderLeft, 10) + 'px';
+				
+				span.style.left = x+parseInt(paddingLeft, 10) + parseInt(borderLeft, 10) + 'px';
 				span.style.fontSize = fontSize;
-
 				span.style.fontFamily = fontFamily;
-
 				span.style.color = color;
 				span.style.display = 'inline-block';
-
 				span.style.filter = "Alpha(opacity=70)";
-				
 
+				
 				document.body.appendChild(span);
-
-				span.style.marginTop = -parseInt(span.clientHeight) / 2 + 'px';
-
-				span.parentNode.removeChild(span);
-
-				inputWrap.appendChild(span);
+				var spanMidY= (parseInt(height)-parseInt(span.clientHeight))/2;
+				span.style.top = y+spanMidY+parseInt(paddingTop, 10) + parseInt(borderTop, 10)+'px';
 				
-
 				(function(i, span) {
 					inputTP[i].onfocus = function() {
 						span.style.display = "none";
