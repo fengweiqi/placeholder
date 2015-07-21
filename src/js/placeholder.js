@@ -60,8 +60,36 @@
 				var color = computedStyle.color;
 				var fontFamily = computedStyle.fontFamily;
 				var borderLeft = isNaN(computedStyle.borderLeftWidth) ? 0 : computedStyle.borderLeftWidth;
-
+				var marginTop = computedStyle.marginTop;
+				var marginBottom = computedStyle.marginBottom;
+				var marginLeft = computedStyle.marginLeft;
+				var marginRight = computedStyle.marginRight;
+				var float = computedStyle.float;
+				var position = computedStyle.position;
+				var top = computedStyle.top;
+				var left = computedStyle.left;
+				var bottom = computedStyle.bottom;
+				var right = computedStyle.right;
 				var rInput = inputTP[i].parentNode.removeChild(inputTP[i]);
+
+				rInput.style.marginTop = 0;
+				rInput.style.marginBottom = 0;
+				rInput.style.marginLeft = 0;
+				rInput.style.marginRight = 0;
+				rInput.style.position = 'static';
+				
+
+				inputWrap.style.marginTop = marginTop;
+				inputWrap.style.marginBottom = marginBottom;
+				inputWrap.style.marginLeft = marginLeft;
+				inputWrap.style.marginRight = marginRight;
+				inputWrap.style.position = 'relative';
+				inputWrap.style.top = top;
+				inputWrap.style.bottom = bottom;
+				inputWrap.style.left = left;
+				inputWrap.style.right = right;
+				
+				inputWrap.style.float = float;
 
 				inputWrap.appendChild(rInput);
 
@@ -79,6 +107,7 @@
 				span.style.display = 'inline-block';
 
 				span.style.filter = "Alpha(opacity=70)";
+				
 
 				document.body.appendChild(span);
 
