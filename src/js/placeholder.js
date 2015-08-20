@@ -17,7 +17,11 @@
 		var inputTP = [];
 		for (var i = 0; i < inputInit.length; i++) {
 			var type = inputInit[i].getAttribute('type');
-			if (type == 'text' 
+			
+			if (type == 'text'
+
+				|| type == null
+				
 				|| type == "password"
 
 				|| type == "tel"
